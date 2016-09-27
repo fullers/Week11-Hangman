@@ -1,0 +1,26 @@
+{
+  "name": "week11hangman",
+  "version": "0.1.0",
+  "description": "Nodejs Hangman game.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fullers/Week11-Hangman.git"
+  },
+  "keywords": [
+    "hangman",
+    "node.js"
+  ],
+  "author": "Shaun L. Fuller",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fullers/Week11-Hangman/issues"
+  },
+  "homepage": "https://github.com/fullers/Week11-Hangman#readme",
+  "dependencies": {
+    "inquirer": "^1.1.3"
+  }
+}
