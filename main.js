@@ -1,32 +1,58 @@
-var inquirer = require('inquirer');
-
 var gamejs = require('./game.js');
 
-var selectedWord = gamejs.randomWord;
+var randomWord = gamejs.randomWord;
 
+console.log(randomWord);
 
-console.log(selectedWord);
+var prompt = require("prompt");
+prompt.start();
 
+var Word = require("./word.js");
 
+var game = {
+  //wordBank: ["Work","Experience","Excellent","Test"],
+  guessesRemaining : 10,
+  currentWrd : null,
+  startGame : function(wrd){
+    //var randomWord = this.wordBank[Math.floor(Math.random() * this.wordBank.length)];
+    //console.log(randomWord); // Comment out after testing
+    this.currentWrd = new Word(randomWord);
+    this.currentWrd.getLets();
+    this.keepPrompting(); 
+  },
 
-var userinput = [];
-var count = 0;
+  keepPrompting: function() {
+    var self = this;
+    prompt.get(["guessLetter"], function(err, result) {
+      console.log("The Letter or space you guessed is: "+result.guessLetter);
+      var findHowManyOfUserGuess = self.currentWrd.checkIfLetterFound(result.guessLetter);
 
-function Guess(letter){
-	this.name = letter;
+      console.log("Guess: "+findHowManyOfUserGuess);
+      
+      if(findHowManyOfUserGuess === 0) {
+        console.log("Your guess is not correct!");
+        self.guessesRemaining -= 1;        
+      } else {
+        console.log("You guessed correctly!");
+        if (self.currentWrd.didWeFindTheWord()) {
+          console.log("You Won!!!");
+          return 1;
+        }else {
+          console.log("Guesses remaining:"+ self.guessesRemaining);
+          console.log(self.currentWrd.wordRender());
+          if (self.guessesRemaining > 0 && self.currentWrd.found === false){
+            self.keepPrompting();
+          } else {
+            if (self.guessesRemaining === 0){
+              console.log("Game Over Bro"); 
+              console.log("The word you were guessing was: "+self.randomWord);
+            }else {
+              console.log(self.currentWrd.wordRender());
+            }
+          }
+        }
+      }
+    });
+  }
 }
-
-var userInput = function() {
-	if (count <= 10) {
-		inquirer.prompt([{
-			name: "letter",
-			message: "Checking Letter...",
-			type: "input",
-		}]).then(function(answers) {
-			var guessedLetters = new Guess(answers.letter);
-			userinput.push(guessedLetters);
-		})
-	}
-}
-
-userInput();
+game.startGame();

@@ -9,3 +9,4 @@ var word = wordsArray[getRandom(0,wordsArray.length)];
   }
 
 exports.randomWord = word;
+
