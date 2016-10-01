@@ -10,12 +10,10 @@ prompt.start();
 var Word = require("./word.js");
 
 var game = {
-  //wordBank: ["Work","Experience","Excellent","Test"],
+  
   guessesRemaining : 10,
   currentWrd : null,
   startGame : function(wrd){
-    //var randomWord = this.wordBank[Math.floor(Math.random() * this.wordBank.length)];
-    //console.log(randomWord); // Comment out after testing
     this.currentWrd = new Word(randomWord);
     this.currentWrd.getLets();
     this.keepPrompting(); 
@@ -32,15 +30,15 @@ var game = {
       if(findHowManyOfUserGuess === 0) {
         console.log("Your guess is not correct!");
         self.guessesRemaining -= 1;
-        console.log("Guesses remaining: "+ self.guessesRemaining);   
-        self.keepPrompting(); 
-
+        console.log("Guesses remaining: "+ self.guessesRemaining); 
+        self.keepPrompting();
       } else {
         console.log("You guessed correctly!");
+       
         if (self.currentWrd.didWeFindTheWord()) {
           console.log("You Won!!!");
           return 1;
-        }else {
+        } else {
           console.log("Guesses remaining: "+ self.guessesRemaining);
           //console.log(self.currentWrd.wordRender());
           if (self.guessesRemaining >= 0 && self.currentWrd.found === false){
