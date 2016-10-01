@@ -4,7 +4,7 @@ function Letter(lets){
     this.appear = false;
 
     this.letterRender = function(charac){
-        console.log("Inside letterRender: "+this.charac);
+        //console.log("Inside letterRender: "+this.charac);
       if(this.charac === false ){
         return "_";
       }else {

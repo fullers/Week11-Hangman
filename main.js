@@ -2,7 +2,7 @@ var gamejs = require('./game.js');
 
 var randomWord = gamejs.randomWord;
 
-console.log(randomWord);
+//console.log(randomWord);
 
 var prompt = require("prompt");
 prompt.start();
@@ -31,21 +31,24 @@ var game = {
       
       if(findHowManyOfUserGuess === 0) {
         console.log("Your guess is not correct!");
-        self.guessesRemaining -= 1;        
+        self.guessesRemaining -= 1;
+        console.log("Guesses remaining: "+ self.guessesRemaining);   
+        self.keepPrompting(); 
+
       } else {
         console.log("You guessed correctly!");
         if (self.currentWrd.didWeFindTheWord()) {
           console.log("You Won!!!");
           return 1;
         }else {
-          console.log("Guesses remaining:"+ self.guessesRemaining);
-          console.log(self.currentWrd.wordRender());
-          if (self.guessesRemaining > 0 && self.currentWrd.found === false){
+          console.log("Guesses remaining: "+ self.guessesRemaining);
+          //console.log(self.currentWrd.wordRender());
+          if (self.guessesRemaining >= 0 && self.currentWrd.found === false){
             self.keepPrompting();
           } else {
             if (self.guessesRemaining === 0){
-              console.log("Game Over Bro"); 
-              console.log("The word you were guessing was: "+self.randomWord);
+              console.log("Game Over!"); 
+              console.log("The word you trying to guess was: "+self.randomWord);
             }else {
               console.log(self.currentWrd.wordRender());
             }

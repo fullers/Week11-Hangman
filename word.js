@@ -18,11 +18,13 @@ function Word(wrd){
         if(this.lets[i].charac === guessLetter) {
           this.lets[i].appear = true;
           whatToReturn++; 
+          //console.log("What to return " + whatToReturn);
+         return whatToReturn;
+        } else {
+          whatToReturn = 0;
           return whatToReturn;
-          console.log("What to return " + whatToReturn);
-         
-        } 
-      }
+        }
+      } 
     }
 
     this.didWeFindTheWord = function(){
@@ -47,13 +49,10 @@ function Word(wrd){
       for (var i=0; i <this.lets.length; i++){
         str += this.lets[i].letterRender();
         //console.log("test"+this.lets[i]);
-        console.log("Inside word render: "+str);
+        //console.log("Inside word render: "+str);
         return str;
       }
     }
 }
-// var test = new Word('test');
-// var x = test.getLets('test');
-// var y = test.checkIfLetterFound("t");
 
 module.exports = Word;
